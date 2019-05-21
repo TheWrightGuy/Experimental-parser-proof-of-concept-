@@ -1,5 +1,5 @@
 # Universal Documentation Generator (UDG)
-**summary:** A program that reads in a file path, and spits out documentation for any language in the form of a Universal Documnetation File (**"**\*.udf**"** or **"**UDF**"**).
+**summary:** A program that reads in a file path, and spits out documentation for any language in the form of a Universal Documnetation File ( \*.udf or "UDF" ).
 
 ## Design
 
