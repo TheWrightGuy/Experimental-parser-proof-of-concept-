@@ -8,7 +8,7 @@ The process of generating UDFs is broken down into 5 steps.
 2. **Matching** - cross reference file type with database. If filetype is unknown, ask user for symbol representing a single line comment.
 3. **Analyzing** - Reads through the target file, extracting the documentation data embeded within.
 4. **Processing** - Converts the data into tokens that represent the target file's documentation.
-5. **Generation** - The tokens are transformed into (both?) a HTML file and a UDF for user's convinience.
+5. **Generation** - The tokens are transformed into a nice formatted filetype (tbd) for user's convinience.
 
 
 
@@ -29,4 +29,4 @@ The process of generating UDFs is broken down into 5 steps.
 
 
 ###### Post Script Comments
-***yes, we're fully aware we document our code javadoc style. Yes, it's ironic. More people know it though, so there.***
+***Yes, we're fully aware we document our code javadoc style. Yes, it's ironic; Because more people know Javadoc than our new style, we're biting the bullet. Shush.***
