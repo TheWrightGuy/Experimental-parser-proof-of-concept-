@@ -13,6 +13,12 @@
 
  class EntryPoint {
      public static void main(String args[]){
-
+        // Testing
+        FileManager mang = new FileManager("HelloWorld.cpp");
+        System.out.println(mang);
+        mang._FileManagerDestructor();
+        mang = new FileManager("FileManager.java");
+        System.out.println(mang);
+        mang._FileManagerDestructor();
      }
  }
