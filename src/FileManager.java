@@ -33,6 +33,9 @@ import java.util.Arrays;
 import java.util.List;
 
 
+/**
+ * Class that controls I/O of UDG
+ */
 class FileManager {
     // Constants
     private final String REF_FILE_NAME = "knownFileTypes.txt";
@@ -45,7 +48,12 @@ class FileManager {
     private String targetFileNameSuffix;
     private boolean wasNewEntryCreated;
 
-    // Constructor
+	// Constructor
+	/**
+	 * Basic Construtor for the class, properly sets up readers/writers 
+	 * and make sure all necessary files are present/
+	 * @param targetFileName
+	 */
     FileManager(String targetFileName){
         // Initalize Attributes
         fileCommentCode = null;
@@ -81,7 +89,10 @@ class FileManager {
 
     }// End of FileManager(String targetFileName);
 
-    // Public Methods
+	// Public Methods
+	/**
+	 * @param fileSuffix the suffix of the file to be parsed for tags
+	 */
     public void findCommentToken(String fileSuffix){
         ArrayList<String> targetToken = getFileTypesCommentCharacter(fileSuffix);
         if (targetToken == null){
@@ -99,7 +110,10 @@ class FileManager {
         return;
     }
 
-	//TODO: Update to work with vector
+	/**
+	 * Grabs tags from taret file
+	 * @return array of tags
+	 */
     public String[] getTagsFromCode(){
         ArrayList<String> tags = new ArrayList<>();
         try {
@@ -117,6 +131,9 @@ class FileManager {
         return tags.toArray(convArray);
     }
 
+	/**
+	 * Grabs tags from target file, and stores in provided ArrayList, then returns the list
+	 */
 	public ArrayList<String> getTagsFromCode(ArrayList<String> output){
         ArrayList<String> tags = new ArrayList<>();
         try {
@@ -134,7 +151,16 @@ class FileManager {
         return tags;
     }
 
+    @Override
+    public String toString(){
+        return "File type: " + targetFileNameSuffix + 
+            "\nStart of Comment Strings: " + concat(fileCommentCode);
+    }
 
+	// "Public" Methods
+	/**
+	 * Properly closes I/O objects, and calls method to update known file types.
+	 */
     public void _FileManagerDestructor(){
         try{
             TargetFile.close();
@@ -150,16 +176,10 @@ class FileManager {
             addFileTypeToTextFile(targetFileNameSuffix, concat(fileCommentCode));
     }
 
-    @Override
-    public String toString(){
-        return "File type: " + targetFileNameSuffix + 
-            "\nSingle Line Comment " + concat(fileCommentCode);
-    }
-
-    // Helper Methods
+	// Helper Methods
+	// Grabs The correct "comment code" to look for when analyzing target file
     private ArrayList<String> getFileTypesCommentCharacter(String suffix){	
         // Local Variables
-        
         boolean isTokenFound = false;
         String lineIn = "garbage_Value";
         while(lineIn != null && !isTokenFound){
@@ -173,6 +193,7 @@ class FileManager {
 					for(String s : input){
 						discoveredToken.add(s);
 					}
+					return discoveredToken;
                 }
             } catch (IOException e){
                 System.out.println(e);
@@ -183,6 +204,7 @@ class FileManager {
         return null;
     }
 
+	// Records a new comment code if a file type hasn't been recorded before
     private void addFileTypeToTextFile(String suffix, String commentCode){
         try {
             System.out.println("Comment code: " + commentCode);
@@ -197,6 +219,7 @@ class FileManager {
         }
 	}
 	
+	// Takes an Array list, and converts it to a concatenated string of its elements
 	private String concat(ArrayList<String> arr){
 		if (arr == null){
 			return null;
@@ -208,6 +231,7 @@ class FileManager {
 		return commentStr;
 	}
 
+	// Checks if the comment code is inside the provided string.
 	private boolean containedIn(String code){
 		for(String comp : fileCommentCode){
 			if(code.contains(comp + "@")){
